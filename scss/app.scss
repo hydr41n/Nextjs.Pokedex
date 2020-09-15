@@ -1,5 +1,14 @@
 @import "~bulma/bulma";
 
-body, html{
-	zoom: 85%
+html, body{ 
+  min-height: 100vh;
+  overflow: auto;
+}
+
+.zoom{
+	zoom:70%
+}
+
+.pointer{
+	cursor: pointer;
 }

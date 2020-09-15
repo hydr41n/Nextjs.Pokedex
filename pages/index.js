@@ -1,14 +1,16 @@
 import PokeList from './pokelist'
 
 
-function HomePage() {
+function Pokedex() {
   return(
-    <div className="container">
-		<div className="section">
-      		<PokeList/>
+    <div className="hero is-light zoom">
+		<div className="hero-body">
+			<div className="container">
+      			<PokeList/>
+      		</div>
       	</div>
     </div>
   )
 }
 
-export default HomePage
+export default Pokedex
