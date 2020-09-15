@@ -20,7 +20,7 @@ function PokeList() {
 
   function pokemonFilter(x){
     setSearch(x)
-    let res = pokemonF.filter(obj => Object.values(obj).some(val => val.includes(x)))
+    let res = pokemonF.filter(obj => Object.values(obj).some(val => val.includes(x.toLowerCase())))
     setPokemon(res)
   }
 
@@ -49,7 +49,7 @@ function PokeList() {
                       </div>
                       <div className="card-content">
                         <div className="content has-text-centered">
-                          <h1 className="is-size-1-mobile">{pokemon.name}</h1>
+                          <h1 className="is-size-1-mobile is-capitalized">{pokemon.name}</h1>
                         </div>
                       </div>
                       <footer className="card-footer">
