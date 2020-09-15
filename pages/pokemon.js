@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import {Img} from 'react-image'
 
 function Pokemon() {	
     const router = useRouter()

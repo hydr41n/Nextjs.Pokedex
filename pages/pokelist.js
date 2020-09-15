@@ -9,11 +9,13 @@ function PokeList() {
   const [pokemon,setPokemon] = useState([])
   const [pokemonF,setPokemonF] = useState([])
   const [search,setSearch] = useState('')
+  const [loading,setLoading] = useState(<img src="./loadingBall.gif" alt=""/>)
 
   let results = async function fetchData() {
       const res = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=1050&offset=0");
       setPokemon(res.data.results);
       setPokemonF(res.data.results);
+      setLoading('');
     }
 
   function pokemonFilter(x){
@@ -28,38 +30,41 @@ function PokeList() {
 
 
   return (
-    <div className="continer">
+    <div className="continer min">
 
-      <div className="content">
-        <input className="input is-danger is-large  is-focused" type="text" placeholder="Search Your Pokemon..."  onKeyUp={(e)=>{pokemonFilter(e.target.value)}}/>
-      </div>
-
-      <div className="columns is-multiline">
-
-      {pokemon.map((pokemon, id)=> {
-        const pID = pokemon.url.split('/')[6]
-        const pURL = pokeUrl+pID+'.png'
-        return (
-                <div className="column is-one-third pointer" key={id} onClick={() => router.push({pathname:'/pokemon', query:{pokemon:`${pokemon.name}`,id:`${pID}`}})}>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-square">
-                          <img loading="lazy" src={pURL} onError={(e)=>{e.target.onError=null;e.target.src=`${defaultImg}`}} alt={pokemon.name}/>
-                        </figure>
-                      </div>
-                      <footer className="card-footer has-background-danger">
-                        <div className="card-footer-item">
-                          <div className="content has-text-centered">
-                            <h1 className="is-size-1-mobile is-capitalized  has-text-white">{pokemon.name}</h1>
+        <div className="content">
+          <input className="input is-danger is-large  is-focused" type="text" placeholder="Search Your Pokemon..."  onKeyUp={(e)=>{pokemonFilter(e.target.value)}}/>
+        </div>
+        <div className="hero">
+        <div className="container">
+          {loading}
+        </div>
+        </div>
+        <div className="columns is-multiline">
+          {pokemon.map((pokemon, id)=> {
+              const pID = pokemon.url.split('/')[6]
+              const pURL = pokeUrl+pID+'.png'
+              return (
+                      <div className="column is-one-third pointer" key={id} onClick={() => router.push({pathname:'/pokemon', query:{pokemon:`${pokemon.name}`,id:`${pID}`}})}>
+                          <div className="card">
+                            <div className="card-image">
+                              <figure className="image is-square">
+                                <img loading="lazy" src={pURL} onError={(e)=>{e.target.onError=null;e.target.src=`${defaultImg}`}} alt={pokemon.name}/>
+                              </figure>
+                            </div>
+                            <footer className="card-footer has-background-danger">
+                              <div className="card-footer-item">
+                                <div className="content has-text-centered">
+                                  <h1 className="is-size-1-mobile is-capitalized  has-text-white">{pokemon.name}</h1>
+                                </div>
+                              </div>
+                            </footer>
                           </div>
-                        </div>
-                      </footer>
-                    </div>
-                </div>
-              )}
-      )}
+                      </div>
+                    )}
+            )}
+        </div>
     </div>
-  </div>
   )
 }
 
